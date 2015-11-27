@@ -22,20 +22,7 @@ $results = $db_handle->runQuery($query);
         <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 		
 		<link rel="stylesheet" type="text/css" href="css/custom.css" />
-			
-		<!-- ukit  -->
-		
 		<link rel="stylesheet" href="ukit/css/uikit.min.css" />
-        <script src="ukit/js/jquery.js"></script>
-        <script src="ukit/js/uikit.min.js"></script>
-		
-		 <link rel="stylesheet" href="ukit/css/uikit.docs.min.css">
-       
-        <script src="ukit/js/jquery.js"></script>
-        <script src="ukit/js/components/datepicker.js"></script>
-        <script src="ukit/js/components/form-select.js"></script>
-		
-		<!-- ukit  -->
        
     
 		<link rel="stylesheet" href="css/bootstrap.css">
@@ -201,7 +188,7 @@ function getArea(val) {
 						
 							  <ul class="custom_nav nav navbar-nav navbar-left ">
 								<li><a href="#top_nav_bar"><span class="glyphicon glyphicon-home"></span> হোম </a></li>
-								<li><a href="#product_area"><span class="glyphicon glyphicon-share"></span> নতুন পণ্য যোগ করুন </a></li>
+								<li><a href="#sign_up_area"><span class="glyphicon glyphicon-share"></span> সাইন আপ </a></li>
 								<li><a href="#login_area"><span class="glyphicon glyphicon-user"></span> লগ ইন</a></li>
 								<li><a href="#"><span class="glyphicon glyphicon-search"></span> সার্চ </a></li>
 								<li class="dropdown">
@@ -294,7 +281,7 @@ function getArea(val) {
 		
 		
 		
-		<section id="product_area" class="top_area">
+		<section id="sign_up_area" class="top_area">
 				
 				
 							<div class="container">
@@ -314,53 +301,40 @@ function getArea(val) {
 								
 								<table class="tabledesign">
 								<br>
-								<h3> নতুন পণ্য যোগ করুন</h3>
+								<h3>সাইন আপ </h3>
 								<tr>
-								  <td><p>Category</p> </td>
-								  <td>
-								  <select onchange="yesnoCheck(this);" name="category_type" class="custom_input" >
-								  <option  value="" >---Select---</option>
-								  <option  value="seed">Seed</option>
-								  <option value="oil">Oil</option>
-								  </select>
+								  <td><p>Name</p> </td>
+								  <td><input class="custom_input" id="name" type="text" name="name" placeholder="Enter Your Name">
 								  </td>
-								</tr>
-								
-								
-								<tr>
-								  <td><p id="seed_sub" style="display:none">Seed Sub</p></td>
-								  <td>
-								  <select id="seed_sub_type" style="display:none" name="seed_sub_type" class="custom_input" >
-								  <option  value="" >---Select---</option>
-								  <option  value="rice">Rice</option>
-								  <option value="gom">Gom</option>
-								  </select>
-								  </td>
-								</tr>
-								
-								<tr>
-								 <td><p id="oil_sub" style="display:none">Oil Sub</p></td>
-								  <td>
-								  <select id="oil_sub_type" style="display:none"  name="oil_sub_type" class="custom_input" >
-								  <option  value="" >---Select---</option>
-								  <option  value="soya">Soya</option>
-								  <option value="sorisa">Sorisa</option>
-								  </select>
-								  </td>
-								</tr>
+								  
+								  </tr>
 								 
 								  
 								  <tr>
-								  <td><p>Price Range</p> </td>
-								  <td><input class="custom_input" id="price_range" type="text" name="price_range" placeholder="price range">
+								  <td><p>E-mail</p> </td>
+								  <td><input class="custom_input" id="email" type="text" name="email" placeholder="email@example.com">
 								  </td>
 								  
 								  </tr>
 								  
-				
+								 <tr>
+								  <td> <p>Password</p> </td>
+								  <td> <input class="custom_input" id="password"  type="password" name="password"  placeholder="type your password">
+								 </td>
+								  
+								 </tr>
+								 
+								 
+								 <tr>
+								  <td> <p>Address</p> </td>
+								  <td> <textarea class="custom_input" id="address"  name="address"  placeholder="type your address"></textarea>
+								 </td>
+								  
+								 </tr>
+								 
 								  <tr>
-								  <td> <p>Expire Date</p> </td>
-								  <td> <input class="custom_input" id="expire_date"  type="text" name="expire_date" value="<?php echo date('d-m-Y')?>" data-uk-datepicker="{format:'DD-MM-YYYY',minDate:0}" placeholder="dd-mm-yyyy" readonly>
+								  <td> <p>Phone</p> </td>
+								  <td> <input class="custom_input" id="phone_number"  type="text" name="phone_number"  placeholder="01916355002">
 								 </td>
 								  
 								 </tr>
@@ -368,7 +342,9 @@ function getArea(val) {
 									
 								<tr>
 								  <td> <p>User Type</p> </td>
-								  <td> <input class="custom_input" id="u_id" type="text" name="u_id" value="<?php if(!empty($_SESSION['user_id']))echo $_SESSION['user_id'];?>"placeholder="user id">
+								  <td> <select name="country" id="user-list" class="custom_input"> 
+								  <option value="farmer">Farmer</option>
+								  <option value="buyer">Buyer</option>
 								 </td>
 								  
 								 </tr>
@@ -519,30 +495,78 @@ function getArea(val) {
         <script src="js/main.js"></script>       
 		
 		<!-- Circle  -->
+		<script src="js/circular-progress.js"></script>
+		<script>
 
-		    <script>
-    function yesnoCheck(that) {
-        if (that.value == "seed") {
-         
-            document.getElementById("seed_sub").style.display = "block";
-            document.getElementById("seed_sub_type").style.display = "block";
-        }else {
-          
-			document.getElementById("seed_sub").style.display = "none";
-            document.getElementById("seed_sub_type").style.display = "none";
-        }
+
+		(function () {
+		  var n, id, progress;
+
+		  progress = new CircularProgress({
+			radius: 50,
+			lineWidth: 2,
+			strokeStyle: 'black',
+			initial: {
+			  lineWidth: 4,
+			  strokeStyle: '#fba919'
+			}
+		  });
+
+		  document.getElementById('counter1').appendChild(progress.el); 
+
+		  n = 0;
+		  id = setInterval(function () {
+			if (n == 75) clearInterval(id);
+			progress.update(n++);
+		  }, 70);
+		})();
 		
-		if (that.value == "oil") {
-             document.getElementById("oil_sub").style.display = "block";
-            document.getElementById("oil_sub_type").style.display = "block";
-			
-        } else {
-               document.getElementById("oil_sub").style.display = "none";
-            document.getElementById("oil_sub_type").style.display = "none";
-        }
+		(function () {
+		  var n, id, progress;
 
-    }
-</script>
+		  progress = new CircularProgress({
+			radius: 50,
+			lineWidth: 2,
+			strokeStyle: 'black',
+			initial: {
+			  lineWidth: 4,
+			  strokeStyle: '#fba919'
+			}
+		  });
+
+		  document.getElementById('counter2').appendChild(progress.el); 
+
+		  n = 0;
+		  id = setInterval(function () {
+			if (n == 63) clearInterval(id);
+			progress.update(n++);
+		  }, 70);
+		})();
+		
+		(function () {
+		  var n, id, progress;
+
+		  progress = new CircularProgress({
+			radius: 50,
+			lineWidth: 2,
+			strokeStyle: 'black',
+			initial: {
+			  lineWidth: 4,
+			  strokeStyle: '#fba919'
+			}
+		  });
+
+		  document.getElementById('counter3').appendChild(progress.el); 
+
+		  n = 0;
+		  id = setInterval(function () {
+			if (n == 57) clearInterval(id);
+			progress.update(n++);
+		  }, 70);
+		})();
+
+		</script>
+
 		
 		
 		<!-- Circle  -->
