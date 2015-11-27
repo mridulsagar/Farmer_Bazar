@@ -4,7 +4,7 @@ $db_handle = new DBController();
 $query ="SELECT DISTINCT country FROM tbl_profile ORDER BY country";
 $results = $db_handle->runQuery($query);
 ?>
-
+<?php session_start();?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -70,7 +70,37 @@ function trim(str){
 	 return str;
 }
 </script>
-		
+
+<script type="text/javascript">
+function validLogin(){
+	  var email=$('#email_in').val();
+	  var password=$('#password_in').val();
+
+	  var dataString = 'email='+ email + '&password='+ password;
+	  $("#flash_in").show();
+	  $("#flash_in").fadeIn(400).html('<img src="img/loading.gif" />');
+	  $.ajax({
+	  type: "POST",
+	  url: "login_val.php",
+	  data: dataString,
+	  cache: false,
+	  success: function(result){
+			   var result=trim(result);
+			   $("#flash_in").hide();
+			   if(result=='correct'){
+					
+			   }else{
+					 $("#errorMessage_in").html(result);
+			   }
+	  }
+	  });
+}
+
+function trim(str){
+	 var str=str.replace(/^\s+|\s+$/,'');
+	 return str;
+}
+</script>
 		
 		
 		
@@ -124,7 +154,7 @@ function getArea(val) {
 				</div>
 				
 				<div class="topbar_right col-xs-12 col-sm-12 col-md-5 col-lg-5">
-				<p> You are logged in</p>
+				<p> <?php if(!empty($_SESSION['user_name'])&&!empty($_SESSION['user_type'])){echo'Hello '.$_SESSION['user_name'].'<br>You are Looged in as '.$_SESSION['user_type'].'';}?></p>
 				</div>
 
 			
@@ -364,14 +394,14 @@ function getArea(val) {
 								
 								  <tr>
 								  <td><p>E-mail</p> </td>
-								  <td><input class="custom_input" id="email" type="text" name="email" placeholder="email@example.com">
+								  <td><input class="custom_input" id="email_in" type="text" name="email" placeholder="email@example.com">
 								  </td>
 								  
 								  </tr>
 								  
 								 <tr>
 								  <td> <p>Password</p> </td>
-								  <td> <input class="custom_input" id="password"  type="password" name="password"  placeholder="type your password">
+								  <td> <input class="custom_input" id="password_in"  type="password" name="password"  placeholder="type your password">
 								 </td>
 								  
 								 </tr>
@@ -383,9 +413,9 @@ function getArea(val) {
 								</tr>
 								 
 								 
-								<tr><td></td><td id="flash"></td></tr>
+								<tr><td></td><td id="flash_in"></td></tr>
 								  
-								<tr><td></td><td id="errorMessage"></td></tr>
+								<tr><td></td><td id="errorMessage_in"></td></tr>
 								
 								
 								</table>

@@ -1,7 +1,6 @@
-	<?php include("../db_connect.php")?>
-	<?php
+<?php
 	session_start();
-	include_once('../db_connect.php');
+	include_once('db_connect.php');
 	$message=array();
 	if(isset($_POST['email']) && !empty($_POST['email'])){
 		$email=mysql_real_escape_string($_POST['email']);
@@ -61,10 +60,9 @@
 								$_SESSION['user_id'] = "$temp_id";
 								$_SESSION['user_type'] = "$temp_type";
 								
-					
+
 							
-							
-							 echo'<script type="text/javascript">window.location = "../user/user_panel.php";</script>';
+							 echo'<script type="text/javascript">window.location = "index.php";</script>';
 							exit;
 							}
 							
