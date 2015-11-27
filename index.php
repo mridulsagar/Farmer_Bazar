@@ -22,7 +22,7 @@ $results = $db_handle->runQuery($query);
         <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 		
 		<link rel="stylesheet" type="text/css" href="css/custom.css" />
-			
+		
 		<!-- ukit  -->
 		
 		<link rel="stylesheet" href="ukit/css/uikit.min.css" />
@@ -49,21 +49,59 @@ $results = $db_handle->runQuery($query);
 		<link rel="stylesheet" href="responsive.css">
 		
 		<script type="text/javascript">
-function validInsert(){
-	 var type = document.getElementById("user-list").value;
-	  var name=$('#name').val();
-	  var email=$('#email').val();
-	  var password=$('#password').val();
-	  var address=$('#address').val();
-	  var phone=$('#phone_number').val();
-	  var file=$('#fileToUpload').val();
-
-	  var dataString = 'name='+ name + '&email='+ email + '&password='+ password + '&phone_number='+ phone + '&type='+ type + '&address='+ address;
+		
+		
+function validProduct(){
+	 var category = document.getElementById("category_type").value;
+	 
+	if( category=="")
+	 {
+		 alert("category Need");
+	 }
+	 else {
+		
+		
+			 
+			 if(category =="oil")
+			 {
+				 var subcate = document.getElementById("oil_sub_type").value;
+				 if( subcate=="")
+				 {
+					 alert("Oil Sub category Need");
+				 }
+		 
+			 }
+			 else if(category =="seed")
+			 {
+				 var subcate = document.getElementById("seed_sub_type").value;
+				 if( subcate=="")
+				 {
+					 alert("Seed Sub category Need");
+				 }
+				
+			 }
+	 }
+		 
+		 
+	 
+	 
+	 
+	 var district = document.getElementById("district-list").value;
+	 if(district=="")
+	 {
+		 alert("District Need");
+	 }
+	 
+	  var price=$('#price_range').val();
+	  var expire=$('#expire_date').val();
+	 
+	   
+	  var dataString = 'category='+ category + '&subcategory='+ subcate + '&price_range='+ price+'&district='+ district+'&expire_date='+ expire;
 	  $("#flash").show();
 	  $("#flash").fadeIn(400).html('<img src="img/loading.gif" />');
 	  $.ajax({
 	  type: "POST",
-	  url: "signup_val.php",
+	  url: "product_val.php",
 	  data: dataString,
 	  cache: false,
 	  success: function(result){
@@ -318,7 +356,7 @@ function getArea(val) {
 								<tr>
 								  <td><p>Category</p> </td>
 								  <td>
-								  <select onchange="yesnoCheck(this);" name="category_type" class="custom_input" >
+								  <select onchange="yesnoCheck(this);"  id="category_type" name="category_type" class="custom_input" >
 								  <option  value="" >---Select---</option>
 								  <option  value="seed">Seed</option>
 								  <option value="oil">Oil</option>
@@ -352,11 +390,22 @@ function getArea(val) {
 								  
 								  <tr>
 								  <td><p>Price Range</p> </td>
-								  <td><input class="custom_input" id="price_range" type="text" name="price_range" placeholder="price range">
+								  <td><input class="custom_input" id="price_range" type="text" name="price_range" placeholder="35-40 TK">
 								  </td>
 								  
 								  </tr>
 								  
+								  
+								  <tr>
+								  <td> <p>District</p> </td>
+								  <td> <select name="district" id="district-list" class="custom_input"> 
+								  <option value="sylhet">Sylhet</option>
+								  <option value="sunamgonj">Sunamgonj</option>
+								  <option value="hobigonj">Hobigonj</option>
+								  <option value="moulovibazar">Moulovibazar</option>
+								 </td>
+								  
+								 </tr>
 				
 								  <tr>
 								  <td> <p>Expire Date</p> </td>
@@ -375,7 +424,7 @@ function getArea(val) {
 								  
 								<tr>
 								  <td></td>
-								  <td> <input type="button" class="btn btn-default btn_book" name="submit" value="Sign Up Now" onclick="validInsert()"></td>
+								  <td> <input type="button" class="btn btn-default btn_book" name="submit" value="Enter" onclick="validProduct()"> </td>
 								</tr>
 								 
 								 
