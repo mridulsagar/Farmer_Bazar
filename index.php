@@ -267,13 +267,13 @@ function getArea(val) {
 								<li><a href="#login_area"><span class="glyphicon glyphicon-user"></span> লগ ইন</a></li>
 								<li><a href="#search_area"><span class="glyphicon glyphicon-search"></span> সার্চ </a></li>
 								<li class="dropdown">
-								  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account<b class="caret"></b></a>
+								  <a href="#" class="dropdown-toggle" data-toggle="dropdown">অ্যাকাউন্ট<b class="caret"></b></a>
 								  <ul class="dropdown-menu">
-									<li><a href="#">Account Settings</a></li>
-									<li><a href="#">Profile Settings</a></li>
+									<li><a href="#">অ্যাকাউন্ট সেটিংস</a></li>
+									<li><a href="#">Profile সেটিংস</a></li>
 									<li><a href="#">View Profile</a></li>
 									<li class="divider"></li>
-									<li><a href="#">Log Out</a></li>
+									<li><a href="#">লগ আউট</a></li>
 								  </ul>
 								</li>
 							  </ul>
@@ -332,11 +332,11 @@ function getArea(val) {
 					  <!-- Controls -->
 					  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
 						<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-						<span class="sr-only">Previous</span>
+						<span class="sr-only">পূর্ববর্তী</span>
 					  </a>
 					  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
 						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-						<span class="sr-only">Next</span>
+						<span class="sr-only">পরবর্তী</span>
 					  </a>
 					</div>
 					
@@ -378,42 +378,42 @@ function getArea(val) {
 								<br>
 								<h3> নতুন পণ্য যোগ করুন</h3>
 								<tr>
-								  <td><p>Category</p> </td>
+								  <td><p>শ্রেণী</p> </td>
 								  <td>
 								  <select onchange="yesnoCheck(this);"  id="category_type" name="category_type" class="custom_input" >
-								  <option  value="" >---Select---</option>
-								  <option  value="seed">Seed</option>
-								  <option value="oil">Oil</option>
+								  <option  value="" >---নির্বাচন করুন---</option>
+								  <option  value="seed">শস্য</option>
+								  <option value="oil">তৈল</option>
 								  </select>
 								  </td>
 								</tr>
 								
 								
 								<tr>
-								  <td><p id="seed_sub" style="display:none">Seed Sub</p></td>
+								  <td><p id="seed_sub" style="display:none">শস্য উপ-শ্রেণী</p></td>
 								  <td>
 								  <select id="seed_sub_type" style="display:none" name="seed_sub_type" class="custom_input" >
-								  <option  value="" >---Select---</option>
-								  <option  value="rice">Rice</option>
-								  <option value="gom">Gom</option>
+								  <option  value="" >---নির্বাচন করুন---</option>
+								  <option  value="rice">চাল</option>
+								  <option value="gom">গম</option>
 								  </select>
 								  </td>
 								</tr>
 								
 								<tr>
-								 <td><p id="oil_sub" style="display:none">Oil Sub</p></td>
+								 <td><p id="oil_sub" style="display:none">তৈল উপ-শ্রেণী</p></td>
 								  <td>
 								  <select id="oil_sub_type" style="display:none"  name="oil_sub_type" class="custom_input" >
-								  <option  value="" >---Select---</option>
-								  <option  value="soya">Soya</option>
-								  <option value="sorisa">Sorisa</option>
+								  <option  value="" >---নির্বাচন করুন---</option>
+								  <option  value="soya">সয়াবিন তেল</option>
+								  <option value="sorisa">সরিষা তেল</option>
 								  </select>
 								  </td>
 								</tr>
 								 
 								  
 								  <tr>
-								  <td><p>Price Range</p> </td>
+								  <td><p>মূল্য </p> </td>
 								  <td><input class="custom_input" id="price_range" type="text" name="price_range" placeholder="35-40 TK">
 								  </td>
 								  
@@ -421,12 +421,12 @@ function getArea(val) {
 								  
 								  
 								  <tr>
-								  <td> <p>District</p> </td>
+								  <td> <p>জেলা</p> </td>
 								  <td> <select name="district" id="district-list" class="custom_input"> 
-								  <option value="sylhet">Sylhet</option>
-								  <option value="sunamgonj">Sunamgonj</option>
-								  <option value="hobigonj">Hobigonj</option>
-								  <option value="moulovibazar">Moulovibazar</option>
+								  <option value="sylhet">সিলেট</option>
+								  <option value="sunamgonj">সুনামগঞ্জ</option>
+								  <option value="hobigonj">হবিগঞ্জ</option>
+								  <option value="moulovibazar">মৌলভিবাজার</option>
 								  </select>
 								  
 								 </td>
@@ -434,7 +434,7 @@ function getArea(val) {
 								 </tr>
 				
 								  <tr>
-								  <td> <p>Expire Date</p> </td>
+								  <td> <p>মেয়াদ উত্তীর্ণের  তারিখ</p> </td>
 								  <td> <input class="custom_input" id="expire_date"  type="text" name="expire_date" value="<?php echo date('d-m-Y')?>" data-uk-datepicker="{format:'DD-MM-YYYY',minDate:0}" placeholder="dd-mm-yyyy" readonly>
 								 </td>
 								  
@@ -492,14 +492,14 @@ function getArea(val) {
 								<tr>
 								
 								  <tr>
-								  <td><p>E-mail</p> </td>
+								  <td><p>ইমেইল</p> </td>
 								  <td><input class="custom_input" id="email_in" type="text" name="email" placeholder="email@example.com">
 								  </td>
 								  
 								  </tr>
 								  
 								 <tr>
-								  <td> <p>Password</p> </td>
+								  <td> <p>পাসওয়ার্ড</p> </td>
 								  <td> <input class="custom_input" id="password_in"  type="password" name="password"  placeholder="type your password">
 								 </td>
 								  
@@ -563,9 +563,9 @@ function getArea(val) {
 											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 											
 												 <select onchange="SearchCheck(this);"  id="s_category_type" name="s_category_type" class="custom_input" >
-												  <option  value="" >---Select Category---</option>
-												  <option  value="seed">Seed</option>
-												  <option value="oil">Oil</option>
+												  <option  value="" >---নির্বাচন করুন---</option>
+												  <option  value="seed">শস্য</option>
+												  <option value="oil">তৈল</option>
 												  </select>
 								
 											</div>
@@ -574,17 +574,17 @@ function getArea(val) {
 											
 													
 													  <select id="s_seed_sub_type" style="display:none" name="seed_sub_type" class="custom_input" >
-													  <option  value="" >---Select Seed Sub Category---</option>
-													  <option  value="rice">Rice</option>
-													  <option value="gom">Gom</option>
+													  <option  value="" >---শস্যের উপ-শ্রেণী নির্বাচন করুন---</option>
+													  <option  value="rice">চাল</option>
+													  <option value="gom">গম</option>
 													  </select>
 													
 											</div>		
 											<div id="s_oil_sub" style="display:none" class="col-xs-12 col-sm-6 col-md-6 col-lg-3">		
 													  <select id="s_oil_sub_type" style="display:none"  name="oil_sub_type" class="custom_input" >
-													  <option  value="" >---Select Oil Sub Category---</option>
-													  <option  value="soya">Soya</option>
-													  <option value="sorisa">Sorisa</option>
+													  <option  value="" >---তৈলে উপ-শ্রেণী নির্বাচন করুন---</option>
+													  <option  value="soya">সয়াবিন</option>
+													  <option value="sorisa">সরিষা তেল</option>
 													  </select>
 													  </td>
 													</tr>
@@ -595,10 +595,10 @@ function getArea(val) {
 											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 											
 											<select id="s_district_list" name="district"  class="custom_input"> 
-											  <option value="sylhet">Sylhet</option>
-											  <option value="sunamgonj">Sunamgonj</option>
-											  <option value="hobigonj">Hobigonj</option>
-											  <option value="moulovibazar">Moulovibazar</option>
+											  <option value="sylhet">সিলেট</option>
+											  <option value="sunamgonj">সুনামগঞ্জ</option>
+											  <option value="hobigonj">হবিগঞ্জ</option>
+											  <option value="moulovibazar">মৌলভিবাজার</option>
 											</select>
 												
 											
@@ -608,10 +608,10 @@ function getArea(val) {
 											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 											
 											<select name="s_order_list" id="s_order_list" class="custom_input"> 
-											  <option value="category">Category</option>
-											  <option value="subcategory">Sub Category</option>
-											  <option value="district">District </option>
-											  <option value="id"> Serial Wise </option>
+											  <option value="category">শ্রেণী</option>
+											  <option value="subcategory">উপ-শ্রেণী</option>
+											  <option value="district">জেলা </option>
+											  <option value="id"> ক্রমানুসারে  </option>
 											</select>
 											
 												
