@@ -16,20 +16,7 @@
         <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 		
 		<link rel="stylesheet" type="text/css" href="css/custom.css" />
-		
-		<!-- ukit  -->
-		
 		<link rel="stylesheet" href="ukit/css/uikit.min.css" />
-        <script src="ukit/js/jquery.js"></script>
-        <script src="ukit/js/uikit.min.js"></script>
-		
-		 <link rel="stylesheet" href="ukit/css/uikit.docs.min.css">
-       
-        <script src="ukit/js/jquery.js"></script>
-        <script src="ukit/js/components/datepicker.js"></script>
-        <script src="ukit/js/components/form-select.js"></script>
-		
-		<!-- ukit  -->
        
     
 		<link rel="stylesheet" href="css/bootstrap.css">
@@ -37,21 +24,45 @@
         <link rel="stylesheet" href="css/slicknav.css">
         <link rel="stylesheet" href="css/font-awesome.min">
         <link rel="stylesheet" href="css/normalize.css">
+		
+		
+		<!--script src="src/bootstrap-rating-input.js"></script-->
+		<script src="build/bootstrap-rating-input.min.js"></script>
+    
     
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 		<link rel="stylesheet" href="style.css">
 		<link rel="stylesheet" href="responsive.css">
-
+		
+		
+			<script>
+      $(function(){
+        $('input').on('change', function(){
+          alert("Changed: " + $(this).val())
+        });
+      });
+    </script>
 		<script type="text/javascript">
 		
 		
 		function myFunction() {
+			
+			var category = document.getElementById("s_category_type").value;
+			 
+			if( category=="")
+			 {
+				 alert("category Need");
+			 }
+		
+		 
+		 
+			
 			var district = document.getElementById("s_district_list").value;
 			var order = document.getElementById("s_order_list").value;
 	
 		
 			// Returns successful data submission message when the entered information is stored in database.
-			var dataString = 'district='+district+'&order='+order;
+			var dataString = 'category='+category+'&district='+district+'&order='+order;
 			
 			// AJAX code to submit form.
 			$.ajax({
@@ -68,9 +79,74 @@
 			}
 
 		
-		</script>		
+		</script>
 		
-		
+		<script type="text/javascript">
+function validInsert(){
+	 var type = document.getElementById("user-list").value;
+	  var name=$('#name').val();
+	  var email=$('#email').val();
+	  var password=$('#password').val();
+	  var address=$('#address').val();
+	  var phone=$('#phone_number').val();
+	  var file=$('#fileToUpload').val();
+
+	  var dataString = 'name='+ name + '&email='+ email + '&password='+ password + '&phone_number='+ phone + '&type='+ type + '&address='+ address;
+	  $("#flash").show();
+	  $("#flash").fadeIn(400).html('<img src="img/loading.gif" />');
+	  $.ajax({
+	  type: "POST",
+	  url: "signup_val.php",
+	  data: dataString,
+	  cache: false,
+	  success: function(result){
+			   var result=trim(result);
+			   $("#flash").hide();
+			   if(result=='correct'){
+					
+			   }else{
+					 $("#errorMessage").html(result);
+			   }
+	  }
+	  });
+}
+
+function trim(str){
+	 var str=str.replace(/^\s+|\s+$/,'');
+	 return str;
+}
+</script>
+
+<script type="text/javascript">
+function validLogin(){
+	  var email=$('#email_in').val();
+	  var password=$('#password_in').val();
+
+	  var dataString = 'email='+ email + '&password='+ password;
+	  $("#flash_in").show();
+	  $("#flash_in").fadeIn(400).html('<img src="img/loading.gif" />');
+	  $.ajax({
+	  type: "POST",
+	  url: "login_val.php",
+	  data: dataString,
+	  cache: false,
+	  success: function(result){
+			   var result=trim(result);
+			   $("#flash_in").hide();
+			   if(result=='correct'){
+					
+			   }else{
+					 $("#errorMessage_in").html(result);
+			   }
+	  }
+	  });
+}
+
+function trim(str){
+	 var str=str.replace(/^\s+|\s+$/,'');
+	 return str;
+}
+</script>
 		
 <script type="text/javascript">
 		
@@ -144,73 +220,14 @@ function trim(str){
 	 var str=str.replace(/^\s+|\s+$/,'');
 	 return str;
 }
-</script>
+</script>		
+		
+		
+		
+		
+		
+		
 
-<script type="text/javascript">
-function validLogin(){
-	  var email=$('#email_in').val();
-	  var password=$('#password_in').val();
-
-	  var dataString = 'email='+ email + '&password='+ password;
-	  $("#flash_in").show();
-	  $("#flash_in").fadeIn(400).html('<img src="img/loading.gif" />');
-	  $.ajax({
-	  type: "POST",
-	  url: "login_val.php",
-	  data: dataString,
-	  cache: false,
-	  success: function(result){
-			   var result=trim(result);
-			   $("#flash_in").hide();
-			   if(result=='correct'){
-					
-			   }else{
-					 $("#errorMessage_in").html(result);
-			   }
-	  }
-	  });
-}
-
-function trim(str){
-	 var str=str.replace(/^\s+|\s+$/,'');
-	 return str;
-}
-</script>
-		
-		
-		
-		
-		
-		
-		
-		
-		<script>
-function getState(val) {
-	$.ajax({
-	type: "POST",
-	url: "get_district.php",
-	data:'country_id='+val,
-	success: function(data){
-		$("#district-list").html(data);
-	}
-	});
-}
-
-</script>
-
-		<script>
-function getArea(val) {
-	$.ajax({
-	type: "POST",
-	url: "get_area.php",
-	data:'district_id='+val,
-	success: function(data){
-		$("#area-list").html(data);
-	}
-	});
-}
-
-</script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -239,51 +256,23 @@ function getArea(val) {
 
         </header>
 		
-			<section class="control_panel">
-						<div class="myspnav">
-						<div class="h_container">
-						
-						
-						<nav class="mynav navbar navbar-default" role="navigation">
-						  <div class="container-fluid">
-							<!-- Brand and toggle get grouped for better mobile display -->
-							<div class="navbar-header">
-							  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-							  </button>
-							  
-							</div>
-
-							<!-- Collect the nav links, forms, and other content for toggling -->
-							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-							
-						
-							  <ul class="custom_nav nav navbar-nav navbar-left ">
-								<li><a href="#top_nav_bar"><span class="glyphicon glyphicon-home"></span> হোম </a></li>
-								<li><a href="#product_area"><span class="glyphicon glyphicon-share"></span> নতুন পণ্য যোগ করুন </a></li>
-								<li><a href="#login_area"><span class="glyphicon glyphicon-user"></span> লগ ইন</a></li>
-								<li><a href="#search_area"><span class="glyphicon glyphicon-search"></span> সার্চ </a></li>
-								<li class="dropdown">
-								  <a href="#" class="dropdown-toggle" data-toggle="dropdown">অ্যাকাউন্ট<b class="caret"></b></a>
-								  <ul class="dropdown-menu">
-									<li><a href="#">অ্যাকাউন্ট সেটিংস</a></li>
-									<li><a href="#">Profile সেটিংস</a></li>
-									<li><a href="#">View Profile</a></li>
-									<li class="divider"></li>
-									<li><a href="#">লগ আউট</a></li>
-								  </ul>
-								</li>
-							  </ul>
-							</div><!-- /.navbar-collapse -->
-						  </div><!-- /.container-fluid -->
-						</nav>
-
-		
-		
-		</section>
+			<?php 
+			
+			if(!empty($_SESSION['user_type'])&&$_SESSION['user_type']=='farmer')
+			{
+				include('navbar2.php');
+			}else if(!empty($_SESSION['user_type'])&&$_SESSION['user_type']=='buyer')
+			{
+				include('navbar3.php');
+			}
+			else{
+				include('navbar1.php');
+			}
+			//include('navbar1.php');
+			
+			
+			
+			?>
 		
 		
 	
@@ -332,11 +321,11 @@ function getArea(val) {
 					  <!-- Controls -->
 					  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
 						<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-						<span class="sr-only">পূর্ববর্তী</span>
+						<span class="sr-only">Previous</span>
 					  </a>
 					  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
 						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-						<span class="sr-only">পরবর্তী</span>
+						<span class="sr-only">Next</span>
 					  </a>
 					</div>
 					
@@ -353,200 +342,10 @@ function getArea(val) {
 	
 		
 		</section>
-		
-		
-		
-		<section id="product_area" class="top_area">
-				
-				
-							<div class="container">
-					
-						
-							<div class="form_aside col-xs-0 col-sm-0 col-md-6 col-lg-6 ">
-							
-							<p> কৃষি কাজ নয় আধুনিক কৃষি কাজই আমাদের লক্ষ্য <br>
-							এগিয়ে যাছেচ বাংলাদেশ <br>
-							কৃষির উন্নতি দেশের উন্নতি<br>
-							ডিজিটাল দেশের ডিজিটাল কৃষক<br>
-							</p>
-							</div>
-							<div class="form_area login col-xs-12 col-sm-12 col-md-6 col-lg-6 ">
-							
-							
-								
-								<table class="tabledesign">
-								<br>
-								<h3> নতুন পণ্য যোগ করুন</h3>
-								<tr>
-								  <td><p>শ্রেণী</p> </td>
-								  <td>
-								  <select onchange="yesnoCheck(this);"  id="category_type" name="category_type" class="custom_input" >
-								  <option  value="" >---নির্বাচন করুন---</option>
-								  <option  value="seed">শস্য</option>
-								  <option value="oil">তৈল</option>
-								  </select>
-								  </td>
-								</tr>
-								
-								
-								<tr>
-								  <td><p id="seed_sub" style="display:none">শস্য উপ-শ্রেণী</p></td>
-								  <td>
-								  <select id="seed_sub_type" style="display:none" name="seed_sub_type" class="custom_input" >
-								  <option  value="" >---নির্বাচন করুন---</option>
-								  <option  value="rice">চাল</option>
-								  <option value="gom">গম</option>
-								  </select>
-								  </td>
-								</tr>
-								
-								<tr>
-								 <td><p id="oil_sub" style="display:none">তৈল উপ-শ্রেণী</p></td>
-								  <td>
-								  <select id="oil_sub_type" style="display:none"  name="oil_sub_type" class="custom_input" >
-								  <option  value="" >---নির্বাচন করুন---</option>
-								  <option  value="soya">সয়াবিন তেল</option>
-								  <option value="sorisa">সরিষা তেল</option>
-								  </select>
-								  </td>
-								</tr>
-								 
-								  
-								  <tr>
-								  <td><p>মূল্য </p> </td>
-								  <td><input class="custom_input" id="price_range" type="text" name="price_range" placeholder="35-40 TK">
-								  </td>
-								  
-								  </tr>
-								  
-								  
-								  <tr>
-								  <td> <p>জেলা</p> </td>
-								  <td> <select name="district" id="district-list" class="custom_input"> 
-								  <option value="sylhet">সিলেট</option>
-								  <option value="sunamgonj">সুনামগঞ্জ</option>
-								  <option value="hobigonj">হবিগঞ্জ</option>
-								  <option value="moulovibazar">মৌলভিবাজার</option>
-								  </select>
-								  
-								 </td>
-								  
-								 </tr>
-				
-								  <tr>
-								  <td> <p>মেয়াদ উত্তীর্ণের  তারিখ</p> </td>
-								  <td> <input class="custom_input" id="expire_date"  type="text" name="expire_date" value="<?php echo date('d-m-Y')?>" data-uk-datepicker="{format:'DD-MM-YYYY',minDate:0}" placeholder="dd-mm-yyyy" readonly>
-								 </td>
-								  
-								 </tr>
-									
-									
-								<tr>
-								  <td> <p>User Type</p> </td>
-								  <td> <input class="custom_input" id="u_id" type="text" name="u_id" value="<?php if(!empty($_SESSION['user_id']))echo $_SESSION['user_id'];?>"placeholder="user id">
-								 </td>
-								  
-								 </tr>
-								  
-								<tr>
-								  <td></td>
-								  <td> <input type="button" class="btn btn-default btn_book" name="submit" value="Enter" onclick="validProduct()"> </td>
-								</tr>
-								 
-								 
-								<tr><td></td><td id="flash"></td></tr>
-								  
-								<tr><td></td><td id="errorMessage"></td></tr>
-								
-								
-								</table>
-							
-							
-							
-							
-							
-							</div>
-				
-				
-						</div>
-				</div>
-		
-
-		
-		</section>
-		
-				<section id="login_area" class="top_area">
-				
-							
-							<div class="container">
-					
-						
-						
-							<div class="form_area login col-xs-12 col-sm-12 col-md-6 col-lg-6 ">
-							
-							
-								
-								<table class="tabledesign">
-								<br>
-								<h3>লগ ইন</h3>
-								<tr>
-								
-								  <tr>
-								  <td><p>ইমেইল</p> </td>
-								  <td><input class="custom_input" id="email_in" type="text" name="email" placeholder="email@example.com">
-								  </td>
-								  
-								  </tr>
-								  
-								 <tr>
-								  <td> <p>পাসওয়ার্ড</p> </td>
-								  <td> <input class="custom_input" id="password_in"  type="password" name="password"  placeholder="type your password">
-								 </td>
-								  
-								 </tr>
-								 
-					
-								<tr>
-								  <td></td>
-								  <td> <input type="button" class="btn btn-default btn_book" name="submit" value="Log in" onclick="validLogin()"></td>
-								</tr>
-								 
-								 
-								<tr><td></td><td id="flash_in"></td></tr>
-								  
-								<tr><td></td><td id="errorMessage_in"></td></tr>
-								
-								
-								</table>
-							
-							
-							
-							
-							
-							</div>
-							
-							<div class="form_aside col-xs-0 col-sm-0 col-md-6 col-lg-6 ">
-							
-							<p> কৃষি কাজ নয় আধুনিক কৃষি কাজই আমাদের লক্ষ্য <br>
-							এগিয়ে যাছেচ বাংলাদেশ <br>
-							কৃষির উন্নতি দেশের উন্নতি<br>
-							ডিজিটাল দেশের ডিজিটাল কৃষক<br>
-							</p>
-							</div>
-				
-				
-						</div>
-				</div>
-		
-
-		
-		</section>
-		
-		
-		
 		<section id="search_area">
-				
-					<div class="container">
+							<div class="container">
+							<br>
+							<br>
 								<h3> &nbsp সার্চ  করুন</h3>
 		
 						<div class="search_area com-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -562,41 +361,27 @@ function getArea(val) {
 										  
 											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 											
-												 <select onchange="SearchCheck(this);"  id="s_category_type" name="s_category_type" class="custom_input" >
+												 <select  id="s_category_type" name="s_category_type" class="custom_input" >
+												 
 												  <option  value="" >---নির্বাচন করুন---</option>
+												  <option value="<?php if(!empty($_GET['category'])) echo $_GET['category'];?>" <?php if(!empty($_GET['category'])) echo 'selected';?> ><?php if(!empty($_GET['category'])) echo $_GET['category'];?></option>
 												  <option  value="seed">শস্য</option>
 												  <option value="oil">তৈল</option>
 												  </select>
 								
 											</div>
 											
-											<div id="s_seed_sub" style="display:none" class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 											
-													
-													  <select id="s_seed_sub_type" style="display:none" name="seed_sub_type" class="custom_input" >
-													  <option  value="" >---শস্যের উপ-শ্রেণী নির্বাচন করুন---</option>
-													  <option  value="rice">চাল</option>
-													  <option value="gom">গম</option>
-													  </select>
-													
-											</div>		
-											<div id="s_oil_sub" style="display:none" class="col-xs-12 col-sm-6 col-md-6 col-lg-3">		
-													  <select id="s_oil_sub_type" style="display:none"  name="oil_sub_type" class="custom_input" >
-													  <option  value="" >---তৈলে উপ-শ্রেণী নির্বাচন করুন---</option>
-													  <option  value="soya">সয়াবিন</option>
-													  <option value="sorisa">সরিষা তেল</option>
-													  </select>
-													  </td>
-													</tr>
-											</div>		
-											
-											
+										
 											
 											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
 											
 											<select id="s_district_list" name="district"  class="custom_input"> 
+											
+											<option value="" >---জেলা নির্বাচন করুন---</option>
+											<option value="<?php if(!empty($_GET['district'])) echo $_GET['district'];?>" <?php if(!empty($_GET['district'])) echo 'selected';?>><?php if(!empty($_GET['district'])) echo $_GET['district'];?></option>
 											  <option value="sylhet">সিলেট</option>
-											  <option value="sunamgonj">সুনামগঞ্জ</option>
+											  <option value="sunamgonj">ুনামগঞ্জ</option>
 											  <option value="hobigonj">হবিগঞ্জ</option>
 											  <option value="moulovibazar">মৌলভিবাজার</option>
 											</select>
@@ -611,7 +396,8 @@ function getArea(val) {
 											  <option value="category">শ্রেণী</option>
 											  <option value="subcategory">উপ-শ্রেণী</option>
 											  <option value="district">জেলা </option>
-											  <option value="id"> ক্রমানুসারে  </option>
+											  <option value="expire_date">মেয়াদ উত্তীর্ণের  তারিখ</option>
+											  <option value="id"> ক্রমানুসারে </option>
 											</select>
 											
 												
@@ -641,7 +427,7 @@ function getArea(val) {
 				<tr><td></td><td id="flash3"></td></tr>
 				<?php
 
-				//include("search_result_view.php");
+				include("view.php");
 				
 				?>
 				
@@ -653,9 +439,27 @@ function getArea(val) {
 				
 				
 		</section>
-
-        
 		
+		
+		
+		<?php 
+		if(!empty($_SESSION['user_type'])&&$_SESSION['user_type']=='farmer')
+			{
+				include('indexinclude1.php');
+			}else if(!empty($_SESSION['user_type'])&&$_SESSION['user_type']=='buyer')
+			{
+			
+			}
+			else{
+				include('indexinclude.php');
+			}
+		
+		
+		
+		
+		
+		
+		?>
 
         <!-- footer start here -->
         <footer>
@@ -699,13 +503,30 @@ function getArea(val) {
         <!-- footer ends here -->
 
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>       
+<script>
+    function SearchCheck(that) {
+        if (that.value == "seed") {
+         
+            document.getElementById("s_seed_sub").style.display = "block";
+            document.getElementById("s_seed_sub_type").style.display = "block";
+        }else {
+          
+			document.getElementById("s_seed_sub").style.display = "none";
+            document.getElementById("s_seed_sub_type").style.display = "none";
+        }
 		
-		<!-- Circle  -->
+		if (that.value == "oil") {
+             document.getElementById("s_oil_sub").style.display = "block";
+            document.getElementById("s_oil_sub_type").style.display = "block";
+			
+        } else {
+               document.getElementById("s_oil_sub").style.display = "none";
+            document.getElementById("oil_sub_type").style.display = "none";
+        }
+
+    }
+</script>
+
 
 		    <script>
     function yesnoCheck(that) {
@@ -730,32 +551,8 @@ function getArea(val) {
 
     }
 </script>
-		
-		
-		
-<script>
-    function SearchCheck(that) {
-        if (that.value == "seed") {
-         
-            document.getElementById("s_seed_sub").style.display = "block";
-            document.getElementById("s_seed_sub_type").style.display = "block";
-        }else {
-          
-			document.getElementById("s_seed_sub").style.display = "none";
-            document.getElementById("s_seed_sub_type").style.display = "none";
-        }
-		
-		if (that.value == "oil") {
-             document.getElementById("s_oil_sub").style.display = "block";
-            document.getElementById("s_oil_sub_type").style.display = "block";
-			
-        } else {
-               document.getElementById("s_oil_sub").style.display = "none";
-            document.getElementById("oil_sub_type").style.display = "none";
-        }
 
-    }
-</script>
+		
 		
 		<!-- Circle  -->
 
@@ -771,6 +568,14 @@ function getArea(val) {
 			$('#menu').slicknav();
 		});
 		</script>
+		
+		
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>       
+		
 		
 
     </body>
