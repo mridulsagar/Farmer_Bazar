@@ -1,9 +1,3 @@
-<?php
-require_once("dbcontroller.php");
-$db_handle = new DBController();
-$query ="SELECT DISTINCT country FROM tbl_profile ORDER BY country";
-$results = $db_handle->runQuery($query);
-?>
 <?php session_start();?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -47,8 +41,38 @@ $results = $db_handle->runQuery($query);
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 		<link rel="stylesheet" href="style.css">
 		<link rel="stylesheet" href="responsive.css">
-		
+
 		<script type="text/javascript">
+		
+		
+		function myFunction() {
+			var district = document.getElementById("s_district_list").value;
+			var order = document.getElementById("s_order_list").value;
+	
+		
+			// Returns successful data submission message when the entered information is stored in database.
+			var dataString = 'district='+district+'&order='+order;
+			
+			// AJAX code to submit form.
+			$.ajax({
+			type: "POST",
+			url: "view.php",
+			data: dataString,
+			cache: false,
+			success: function(data) {
+			$("#result").html(data);
+			}
+			});
+			
+			
+			}
+
+		
+		</script>		
+		
+		
+		
+<script type="text/javascript">
 		
 		
 function validProduct(){
@@ -241,7 +265,7 @@ function getArea(val) {
 								<li><a href="#top_nav_bar"><span class="glyphicon glyphicon-home"></span> হোম </a></li>
 								<li><a href="#product_area"><span class="glyphicon glyphicon-share"></span> নতুন পণ্য যোগ করুন </a></li>
 								<li><a href="#login_area"><span class="glyphicon glyphicon-user"></span> লগ ইন</a></li>
-								<li><a href="#"><span class="glyphicon glyphicon-search"></span> সার্চ </a></li>
+								<li><a href="#search_area"><span class="glyphicon glyphicon-search"></span> সার্চ </a></li>
 								<li class="dropdown">
 								  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account<b class="caret"></b></a>
 								  <ul class="dropdown-menu">
@@ -403,6 +427,8 @@ function getArea(val) {
 								  <option value="sunamgonj">Sunamgonj</option>
 								  <option value="hobigonj">Hobigonj</option>
 								  <option value="moulovibazar">Moulovibazar</option>
+								  </select>
+								  
 								 </td>
 								  
 								 </tr>
@@ -515,6 +541,118 @@ function getArea(val) {
 
 		
 		</section>
+		
+		
+		
+		<section id="search_area">
+				
+					<div class="container">
+								<h3> &nbsp সার্চ  করুন</h3>
+		
+						<div class="search_area com-xs-12 col-sm-12 col-md-12 col-lg-12">
+							
+							
+							<div class="panel_form com-xs-12 col-sm-12 col-md-12 col-lg-12">
+							
+						
+								
+								<form id="form"  name="form" > 
+								
+							
+										  
+											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+											
+												 <select onchange="SearchCheck(this);"  id="s_category_type" name="s_category_type" class="custom_input" >
+												  <option  value="" >---Select Category---</option>
+												  <option  value="seed">Seed</option>
+												  <option value="oil">Oil</option>
+												  </select>
+								
+											</div>
+											
+											<div id="s_seed_sub" style="display:none" class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+											
+													
+													  <select id="s_seed_sub_type" style="display:none" name="seed_sub_type" class="custom_input" >
+													  <option  value="" >---Select Seed Sub Category---</option>
+													  <option  value="rice">Rice</option>
+													  <option value="gom">Gom</option>
+													  </select>
+													
+											</div>		
+											<div id="s_oil_sub" style="display:none" class="col-xs-12 col-sm-6 col-md-6 col-lg-3">		
+													  <select id="s_oil_sub_type" style="display:none"  name="oil_sub_type" class="custom_input" >
+													  <option  value="" >---Select Oil Sub Category---</option>
+													  <option  value="soya">Soya</option>
+													  <option value="sorisa">Sorisa</option>
+													  </select>
+													  </td>
+													</tr>
+											</div>		
+											
+											
+											
+											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+											
+											<select id="s_district_list" name="district"  class="custom_input"> 
+											  <option value="sylhet">Sylhet</option>
+											  <option value="sunamgonj">Sunamgonj</option>
+											  <option value="hobigonj">Hobigonj</option>
+											  <option value="moulovibazar">Moulovibazar</option>
+											</select>
+												
+											
+											</div>
+											
+											
+											<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+											
+											<select name="s_order_list" id="s_order_list" class="custom_input"> 
+											  <option value="category">Category</option>
+											  <option value="subcategory">Sub Category</option>
+											  <option value="district">District </option>
+											  <option value="id"> Serial Wise </option>
+											</select>
+											
+												
+											
+											</div>
+											
+											
+											
+													
+							
+							</div>
+							
+								<input id="submit" onclick="myFunction()" class="button_custom btn btn-default btn_book" type="button" name="submit" value="Search">
+								
+							
+						</div>
+					</div>
+			
+			
+	
+		
+		</section>
+		 <section class="search_result">
+		
+				<div class="container">
+				<div id="result" class="search_result_show col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<tr><td></td><td id="flash3"></td></tr>
+				<?php
+
+				//include("search_result_view.php");
+				
+				?>
+				
+				</div>
+				
+				</form>
+					
+				</div>
+				
+				
+		</section>
 
         
 		
@@ -586,13 +724,38 @@ function getArea(val) {
             document.getElementById("oil_sub_type").style.display = "block";
 			
         } else {
-               document.getElementById("oil_sub").style.display = "none";
-            document.getElementById("oil_sub_type").style.display = "none";
+              document.getElementById("seed_sub").style.display = "none";
+            document.getElementById("s_oil_sub_type").style.display = "none";
         }
 
     }
 </script>
 		
+		
+		
+<script>
+    function SearchCheck(that) {
+        if (that.value == "seed") {
+         
+            document.getElementById("s_seed_sub").style.display = "block";
+            document.getElementById("s_seed_sub_type").style.display = "block";
+        }else {
+          
+			document.getElementById("s_seed_sub").style.display = "none";
+            document.getElementById("s_seed_sub_type").style.display = "none";
+        }
+		
+		if (that.value == "oil") {
+             document.getElementById("s_oil_sub").style.display = "block";
+            document.getElementById("s_oil_sub_type").style.display = "block";
+			
+        } else {
+               document.getElementById("s_oil_sub").style.display = "none";
+            document.getElementById("oil_sub_type").style.display = "none";
+        }
+
+    }
+</script>
 		
 		<!-- Circle  -->
 

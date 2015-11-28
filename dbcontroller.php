@@ -3,7 +3,7 @@ class DBController {
 	private $host = "localhost";
 	private $user = "root";
 	private $password = "";
-	private $database = "db_doc_chem";
+	private $database = "db_farmer_bazzar";
 	
 	function __construct() {
 		$conn = $this->connectDB();
